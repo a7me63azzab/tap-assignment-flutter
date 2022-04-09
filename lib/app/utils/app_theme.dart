@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tap_assignment/app/store/app_state/app_state.dart';
@@ -19,11 +16,16 @@ import 'package:tap_assignment/gen/fonts.gen.dart';
 //   FontWeight.w900: 'Black',
 // }
 
+// main [FF7F7D]
+// second [141414]
+// third [777777]
+
 abstract class CustomAppTheme {
   static ThemeData getLightTheme(AppState appState) {
     return ThemeData(
       primaryColor: Ui.parseColor("#FD7272"),
       scaffoldBackgroundColor: Ui.parseColor("#F9F9F9"),
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shadowColor: Colors.grey,
@@ -88,10 +90,21 @@ abstract class CustomAppTheme {
         style: TextButton.styleFrom(
             primary: Ui.parseColor(appState.settingsState.mainColor)),
       ),
+
+      // main [FF7F7D]
+      // second [141414]
+      // third [777777]
       colorScheme: ColorScheme.light(
-        primary: Ui.parseColor(appState.settingsState.mainColor),
-        secondary: Ui.parseColor(appState.settingsState.mainColor),
-        tertiary: Colors.white,
+        brightness: Brightness.light,
+        shadow: Colors.grey.withOpacity(0.1),
+        primary: Ui.parseColor("#FF7F7D"),
+        secondary: Ui.parseColor("#141414"),
+        tertiary: Ui.parseColor("#777777"),
+        onTertiary: Colors.white,
+        background: Colors.white,
+        // primary: Ui.parseColor(appState.settingsState.mainColor),
+        // secondary: Ui.parseColor(appState.settingsState.mainColor),
+        // tertiary: Colors.white,
       ),
       textTheme: GoogleFonts.getTextTheme(
         appState.settingsState.googleFont,
@@ -159,23 +172,23 @@ abstract class CustomAppTheme {
   static ThemeData getDarkTheme(AppState appState) {
     return ThemeData(
         primaryColor: Ui.parseColor("#FE716F"),
-        floatingActionButtonTheme:
-            const FloatingActionButtonThemeData(elevation: 0),
+        // floatingActionButtonTheme:
+        //     const FloatingActionButtonThemeData(elevation: 0),
         scaffoldBackgroundColor: Ui.parseColor("#222222"),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shadowColor: Colors.grey,
-            // fixedSize: const Size(double.infinity, 80),
+            shadowColor: Colors.black,
+            fixedSize: const Size(double.infinity, 50),
 
             elevation: 3,
             textStyle: const TextStyle(
-              fontFamily: FontFamily.montserratBold,
+              fontFamily: FontFamily.montserratRegular,
               fontSize: 16,
               color: Colors.white,
             ),
             // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
+              borderRadius: BorderRadius.circular(60.0),
               side: BorderSide.none,
             ),
             onPrimary: Ui.parseColor("#FD7272"),
@@ -191,7 +204,7 @@ abstract class CustomAppTheme {
           centerTitle: true,
           elevation: 0,
           titleTextStyle: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 18,
             fontFamily: FontFamily.montserratBold,
           ),
@@ -203,7 +216,7 @@ abstract class CustomAppTheme {
             // fontFamily: theme.primaryTextTheme.headline6.fontFamily,
           ),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.black,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(100.0),
@@ -225,9 +238,21 @@ abstract class CustomAppTheme {
           style: TextButton.styleFrom(
               primary: Ui.parseColor(appState.settingsState.mainColor)),
         ),
-        colorScheme: ColorScheme.dark(
-          primary: Ui.parseColor(appState.settingsState.mainDarkColor),
-          secondary: Ui.parseColor(appState.settingsState.mainDarkColor),
+        // colorScheme: ColorScheme.dark(
+        //   primary: Ui.parseColor(appState.settingsState.mainDarkColor),
+        //   secondary: Ui.parseColor(appState.settingsState.mainDarkColor),
+        // ),
+        colorScheme: ColorScheme.light(
+          brightness: Brightness.dark,
+          shadow: Colors.black.withOpacity(0.3),
+          primary: Ui.parseColor("#FF7F7D"),
+          secondary: Colors.white,
+          tertiary: Ui.parseColor("#777777"),
+          onTertiary: Ui.parseColor("#3E2B2B"),
+          background: Colors.black,
+          // primary: Ui.parseColor(appState.settingsState.mainColor),
+          // secondary: Ui.parseColor(appState.settingsState.mainColor),
+          // tertiary: Colors.white,
         ),
         textTheme: GoogleFonts.getTextTheme(
             appState.settingsState.googleFont,

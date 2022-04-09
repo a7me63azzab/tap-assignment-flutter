@@ -14,6 +14,9 @@ import 'package:tap_assignment/app/utils/flutter_save_location.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  Brightness? brightness = WidgetsBinding.instance?.window.platformBrightness;
+  print("brightness => $brightness");
+
   _setupLogging();
 
   // Create Persistor

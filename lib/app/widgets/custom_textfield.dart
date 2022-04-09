@@ -1,41 +1,78 @@
-//  Padding(
-//               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(100),
-//                   boxShadow: [
-//                     BoxShadow(
-//                       color: Colors.grey.withOpacity(0.2),
-//                       blurRadius: 20,
-//                       offset: const Offset(0, 5),
-//                     ),
-//                   ],
-//                 ),
-//                 child: TextFormField(
-//                     // controller: _identityController,
-//                     // validator: (val) {
-//                     //   if (val.isEmpty || val.length < 14) {
-//                     //     return 'الرقم القومى خطأ برجاء التاكد من القيمه المدخله مره اخرى';
-//                     //   } else {
-//                     //     return null;
-//                     //   }
-//                     // },
-//                     // decoration: InputDecoration(
-//                     //   contentPadding: const EdgeInsets.all(8),
-//                     //   border: const OutlineInputBorder(
-//                     //     borderRadius: BorderRadius.all(
-//                     //       Radius.circular(10.0),
-//                     //     ),
-//                     //     borderSide: BorderSide(
-//                     //       width: 0,
-//                     //       style: BorderStyle.none,
-//                     //     ),
-//                     //   ),
-//                     //   filled: true,
-//                     //   hintStyle: TextStyle(color: Colors.grey[400]),
-//                     //   hintText: "من فضلك قم بادخال الرقم القومى",
-//                     //   fillColor: Colors.white,
-//                     // ),
-//                     ),
-//               ),
-//             ),
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:tap_assignment/gen/fonts.gen.dart';
+
+enum InputType { price, search, text }
+
+class CustomTextField extends StatelessWidget {
+  // final TextEditingController? textEditingController;
+
+  final Function(String val) onSave;
+  final Function(String val) validate;
+  final String hintText;
+  final InputType inputType;
+  const CustomTextField({
+    Key? key,
+    // this.textEditingController,
+    required this.onSave,
+    required this.validate,
+    required this.hintText,
+    required this.inputType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.shadow,
+              blurRadius: 4,
+              offset: const Offset(0, 0.1),
+              // color: Colors.grey.withOpacity(0.2),
+              // blurRadius: 20,
+              // offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: TextFormField(
+          keyboardType: () {
+            if (inputType == InputType.price) {
+              return TextInputType.number;
+            } else {
+              return TextInputType.text;
+            }
+          }(),
+          onSaved: (val) => onSave(val ?? ""),
+          validator: (val) => validate(val ?? ""),
+          decoration: InputDecoration(
+              hintText: hintText,
+              // hintStyle: TextStyle(),
+              suffixIcon: () {
+                if (inputType == InputType.search) {
+                  return const Icon(CupertinoIcons.search);
+                } else if (inputType == InputType.price) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                    child: Text(
+                      "K.D",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontFamily: FontFamily.montserratRegular,
+                        fontSize: 12,
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }()),
+        ),
+      ),
+    );
+  }
+}

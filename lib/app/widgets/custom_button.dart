@@ -34,8 +34,8 @@ class CustomAppButton extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  fontFamily: FontFamily.montserratBold,
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  fontFamily: FontFamily.montserratSemiBold,
                   fontSize: 16,
                 ),
               ),
