@@ -32,6 +32,7 @@ class _ManageProductsState extends State<ManageProducts> {
                   validate: (String val) {},
                   onSave: (String val) {},
                   inputType: InputType.search,
+                  onChanged: (String val) {},
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -52,10 +53,20 @@ class _ManageProductsState extends State<ManageProducts> {
                 disable: false,
                 isLoading: false,
                 onClick: () {
+                  // ProductRepository productRepository = ProductRepository();
+                  // int? result = await productRepository.addProduct();
+                  // print("insert item in data base => $result");
                   Navigator.of(context)
                       .push(PageRouteBuilder(pageBuilder: (_, __, ___) {
-                    return const AddProductPage();
+                    return AddProductPage();
                   }));
+
+                  // List<Map<String, dynamic>>? allProducts =
+                  //     await productRepository.getAllProducts();
+
+                  // allProducts?.forEach((element) {
+                  //   print(element.toString());
+                  // });
                 },
                 text: 'Add Product',
               ),

@@ -34,8 +34,7 @@ class _TapAssignmentAppState extends State<TapAssignmentApp>
     _widgetsBinding?.addObserver(this);
     _flutterWindow = _widgetsBinding?.window;
 
-    print(
-        "_flutterWindow?.platformDispatcher.platformBrightness => ${_flutterWindow?.platformDispatcher.platformBrightness}");
+
 
     _themeModeNotifier = ThemeModeNotifier(
       ValueNotifier<Brightness>(

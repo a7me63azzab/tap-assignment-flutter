@@ -47,6 +47,8 @@ dependencies:
   flutter_hooks: ^0.18.2+1
   google_fonts: ^2.3.1
   lottie: ^1.2.2
+  sqflite: ^2.0.2
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:

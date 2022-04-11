@@ -21,6 +21,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'settingsState',
       serializers.serialize(object.settingsState,
           specifiedType: const FullType(SettingsState)),
+      'isAvailableToAddProduct',
+      serializers.serialize(object.isAvailableToAddProduct,
+          specifiedType: const FullType(bool)),
     ];
     Object? value;
     value = object.error;
@@ -55,6 +58,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.settingsState.replace(serializers.deserialize(value,
               specifiedType: const FullType(SettingsState))! as SettingsState);
           break;
+        case 'isAvailableToAddProduct':
+          result.isAvailableToAddProduct = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'error':
           result.error = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -74,6 +81,8 @@ class _$AppState extends AppState {
   @override
   final SettingsState settingsState;
   @override
+  final bool isAvailableToAddProduct;
+  @override
   final String? error;
   @override
   final String? success;
@@ -81,10 +90,16 @@ class _$AppState extends AppState {
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({required this.settingsState, this.error, this.success})
+  _$AppState._(
+      {required this.settingsState,
+      required this.isAvailableToAddProduct,
+      this.error,
+      this.success})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         settingsState, 'AppState', 'settingsState');
+    BuiltValueNullFieldError.checkNotNull(
+        isAvailableToAddProduct, 'AppState', 'isAvailableToAddProduct');
   }
 
   @override
@@ -99,6 +114,7 @@ class _$AppState extends AppState {
     if (identical(other, this)) return true;
     return other is AppState &&
         settingsState == other.settingsState &&
+        isAvailableToAddProduct == other.isAvailableToAddProduct &&
         error == other.error &&
         success == other.success;
   }
@@ -106,13 +122,18 @@ class _$AppState extends AppState {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, settingsState.hashCode), error.hashCode), success.hashCode));
+        $jc(
+            $jc($jc(0, settingsState.hashCode),
+                isAvailableToAddProduct.hashCode),
+            error.hashCode),
+        success.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
           ..add('settingsState', settingsState)
+          ..add('isAvailableToAddProduct', isAvailableToAddProduct)
           ..add('error', error)
           ..add('success', success))
         .toString();
@@ -128,6 +149,11 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set settingsState(SettingsStateBuilder? settingsState) =>
       _$this._settingsState = settingsState;
 
+  bool? _isAvailableToAddProduct;
+  bool? get isAvailableToAddProduct => _$this._isAvailableToAddProduct;
+  set isAvailableToAddProduct(bool? isAvailableToAddProduct) =>
+      _$this._isAvailableToAddProduct = isAvailableToAddProduct;
+
   String? _error;
   String? get error => _$this._error;
   set error(String? error) => _$this._error = error;
@@ -142,6 +168,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     final $v = _$v;
     if ($v != null) {
       _settingsState = $v.settingsState.toBuilder();
+      _isAvailableToAddProduct = $v.isAvailableToAddProduct;
       _error = $v.error;
       _success = $v.success;
       _$v = null;
@@ -167,6 +194,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$result = _$v ??
           new _$AppState._(
               settingsState: settingsState.build(),
+              isAvailableToAddProduct: BuiltValueNullFieldError.checkNotNull(
+                  isAvailableToAddProduct,
+                  'AppState',
+                  'isAvailableToAddProduct'),
               error: error,
               success: success);
     } catch (_) {

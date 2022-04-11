@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tap_assignment/gen/fonts.gen.dart';
 
 enum InputType { price, search, text }
@@ -9,6 +10,7 @@ class CustomTextField extends StatelessWidget {
 
   final Function(String val) onSave;
   final Function(String val) validate;
+  final Function(String val) onChanged;
   final String hintText;
   final InputType inputType;
   const CustomTextField({
@@ -16,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     // this.textEditingController,
     required this.onSave,
     required this.validate,
+    required this.onChanged,
     required this.hintText,
     required this.inputType,
   }) : super(key: key);
@@ -32,9 +35,6 @@ class CustomTextField extends StatelessWidget {
               color: Theme.of(context).colorScheme.shadow,
               blurRadius: 4,
               offset: const Offset(0, 0.1),
-              // color: Colors.grey.withOpacity(0.2),
-              // blurRadius: 20,
-              // offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -46,8 +46,14 @@ class CustomTextField extends StatelessWidget {
               return TextInputType.text;
             }
           }(),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          inputFormatters: [
+            FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
+                allow: inputType == InputType.price ? true : false),
+          ],
           onSaved: (val) => onSave(val ?? ""),
           validator: (val) => validate(val ?? ""),
+          onChanged: (val) => onChanged(val),
           decoration: InputDecoration(
               hintText: hintText,
               // hintStyle: TextStyle(),

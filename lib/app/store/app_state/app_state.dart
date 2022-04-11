@@ -13,6 +13,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   // fields go here
   // AllProductsState get allProductsState;
   SettingsState get settingsState;
+  bool get isAvailableToAddProduct;
   String? get error;
   String? get success;
 
@@ -21,6 +22,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   factory AppState.initial() {
     return AppState((p) => p
       ..settingsState = SettingsState.initial().toBuilder()
+      ..isAvailableToAddProduct = true
       ..success = null
       ..error = null);
   }
