@@ -54,7 +54,6 @@ class AddProductPage extends hooky.HookWidget {
                       onChanged: (String val) {
                         dynamic validName =
                             addProductViewModel.validateName(val);
-                        print("from on change name =-=> $validName");
 
                         if (validName == null) {
                           isAllValid.value[0] = true;
@@ -71,9 +70,6 @@ class AddProductPage extends hooky.HookWidget {
                           addProductViewModel.isAvailableToAddProduct(
                               disable: true);
                         }
-
-                        print(
-                            "xcxcxcxc [0] --> ${isAllValid.value.toString()}");
                       },
                     ),
                     CustomTextField(
@@ -102,8 +98,6 @@ class AddProductPage extends hooky.HookWidget {
                           addProductViewModel.isAvailableToAddProduct(
                               disable: true);
                         }
-
-                        print("xcxcxcxc [1]--> ${isAllValid.value.toString()}");
                       },
                     ),
                     CustomTextField(
@@ -132,14 +126,19 @@ class AddProductPage extends hooky.HookWidget {
                           addProductViewModel.isAvailableToAddProduct(
                               disable: true);
                         }
-                        print(
-                            "xcxcxcxc [2] --> ${isAllValid.value.toString()}");
                       },
                     ),
                     CustomAppButton(
-                      disable: addProductViewModel.isValid,
-                      isLoading: false,
-                      onClick: () {},
+                      disable: addProductViewModel.isValid ||
+                          (addProductViewModel.isLoading ?? false),
+                      isLoading: addProductViewModel.isLoading ?? false,
+                      onClick: () {
+                        _formKey.currentState?.save();
+                        addProductViewModel.add(
+                            name: productName.value,
+                            description: productDescription.value,
+                            price: productPrice.value.toInt());
+                      },
                       text: 'Submit',
                     ),
                   ],
@@ -154,13 +153,3 @@ class AddProductPage extends hooky.HookWidget {
     );
   }
 }
-
-// ValueNotifier<T> useCheckFormValidation<T>({required T initialData}) {
-//   final result = hooky.useState<T>(initialData);
-
-//   hooky.useValueChanged<T, void>(result.value, (_, __) {
-//     print("-=-=-=>>> ${result.value}");
-//   });
-
-//   return result;
-// }

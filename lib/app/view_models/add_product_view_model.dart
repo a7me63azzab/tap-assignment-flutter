@@ -12,7 +12,10 @@ class AddProductViewModel {
   final dynamic errorDetails;
 
   //Action
-  final Function? add;
+  final Function(
+      {required String name,
+      required String description,
+      required int price}) add;
   final Function({required String page}) navigate;
   final Function(String name) validateName;
   final Function(String desc) validateDescription;
@@ -26,7 +29,7 @@ class AddProductViewModel {
     required this.isValid,
     this.hasError,
     this.errorDetails,
-    this.add,
+    required this.add,
     required this.isAvailableToAddProduct,
     required this.navigate,
     required this.validateName,
@@ -36,15 +39,16 @@ class AddProductViewModel {
 
   static AddProductViewModel fromStore(Store<AppState?> store) {
     return AddProductViewModel(
-      isLoading: false,
-      hasError: false,
-      errorDetails: "",
+      isLoading: store.state?.addProductState.isLoading,
+      hasError: store.state?.addProductState.hasError,
+      errorDetails: store.state?.addProductState.error,
       isValid: store.state!.isAvailableToAddProduct,
-      add: (String email, String password) {
-        if (kDebugMode) {
-          print("input data =-=-=> $email $password");
-        }
-        // store.dispatch(loginThunkAction(password: password, email: email));
+      add: (
+          {required String name,
+          required String description,
+          required int price}) {
+        store.dispatch(addProductThunkAction(
+            name: name, description: description, price: price));
       },
       navigate: ({required String page}) {
         // store.dispatch(NavigateToAction.push(page));
@@ -75,9 +79,7 @@ class AddProductViewModel {
         }
       },
       isAvailableToAddProduct: ({required bool disable}) {
-        print("from view model check is valid =-=> $disable");
-        store
-            .dispatch(isAvailableToAddProductThunkAction(disable: disable));
+        store.dispatch(isAvailableToAddProductThunkAction(disable: disable));
       },
     );
   }

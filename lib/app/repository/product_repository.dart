@@ -10,11 +10,11 @@ class ProductRepository {
   }
 
   // ADD PRODUCT TO DATABASE
-  Future<int?> addProduct() {
+  Future<int?> addProduct(BuiltProductModel productModel) {
     return _db.insert({
-      "name": "ahmed",
-      "description": "some description",
-      "price": 1000,
+      "name": productModel.name,
+      "description": productModel.description,
+      "price": productModel.pice,
     });
   }
 

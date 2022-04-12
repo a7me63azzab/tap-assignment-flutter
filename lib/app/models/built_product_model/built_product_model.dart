@@ -11,7 +11,7 @@ part 'built_product_model.g.dart';
 abstract class BuiltProductModel
     implements Built<BuiltProductModel, BuiltProductModelBuilder> {
   // fields go here
-  int get id;
+  int? get id;
   String get name;
   String get description;
   num get pice;

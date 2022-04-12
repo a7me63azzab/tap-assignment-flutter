@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tap_assignment/app/models/built_product_model/built_product_model.dart';
 import 'package:tap_assignment/gen/fonts.gen.dart';
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget({Key? key}) : super(key: key);
+  final BuiltProductModel? productModel;
+  const ProductWidget({Key? key, this.productModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ProductWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Ahmed Azzab",
+            productModel?.name ?? "",
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontFamily: FontFamily.montserratSemiBold,

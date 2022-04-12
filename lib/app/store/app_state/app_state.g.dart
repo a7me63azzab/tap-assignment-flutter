@@ -18,9 +18,15 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
   Iterable<Object?> serialize(Serializers serializers, AppState object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'allProductsState',
+      serializers.serialize(object.allProductsState,
+          specifiedType: const FullType(AllProductsState)),
       'settingsState',
       serializers.serialize(object.settingsState,
           specifiedType: const FullType(SettingsState)),
+      'addProductState',
+      serializers.serialize(object.addProductState,
+          specifiedType: const FullType(AddProductState)),
       'isAvailableToAddProduct',
       serializers.serialize(object.isAvailableToAddProduct,
           specifiedType: const FullType(bool)),
@@ -54,9 +60,19 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'allProductsState':
+          result.allProductsState.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(AllProductsState))!
+              as AllProductsState);
+          break;
         case 'settingsState':
           result.settingsState.replace(serializers.deserialize(value,
               specifiedType: const FullType(SettingsState))! as SettingsState);
+          break;
+        case 'addProductState':
+          result.addProductState.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(AddProductState))!
+              as AddProductState);
           break;
         case 'isAvailableToAddProduct':
           result.isAvailableToAddProduct = serializers.deserialize(value,
@@ -79,7 +95,11 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
 
 class _$AppState extends AppState {
   @override
+  final AllProductsState allProductsState;
+  @override
   final SettingsState settingsState;
+  @override
+  final AddProductState addProductState;
   @override
   final bool isAvailableToAddProduct;
   @override
@@ -91,13 +111,19 @@ class _$AppState extends AppState {
       (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {required this.settingsState,
+      {required this.allProductsState,
+      required this.settingsState,
+      required this.addProductState,
       required this.isAvailableToAddProduct,
       this.error,
       this.success})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
+        allProductsState, 'AppState', 'allProductsState');
+    BuiltValueNullFieldError.checkNotNull(
         settingsState, 'AppState', 'settingsState');
+    BuiltValueNullFieldError.checkNotNull(
+        addProductState, 'AppState', 'addProductState');
     BuiltValueNullFieldError.checkNotNull(
         isAvailableToAddProduct, 'AppState', 'isAvailableToAddProduct');
   }
@@ -113,7 +139,9 @@ class _$AppState extends AppState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AppState &&
+        allProductsState == other.allProductsState &&
         settingsState == other.settingsState &&
+        addProductState == other.addProductState &&
         isAvailableToAddProduct == other.isAvailableToAddProduct &&
         error == other.error &&
         success == other.success;
@@ -123,7 +151,11 @@ class _$AppState extends AppState {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc(0, settingsState.hashCode),
+            $jc(
+                $jc(
+                    $jc($jc(0, allProductsState.hashCode),
+                        settingsState.hashCode),
+                    addProductState.hashCode),
                 isAvailableToAddProduct.hashCode),
             error.hashCode),
         success.hashCode));
@@ -132,7 +164,9 @@ class _$AppState extends AppState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
+          ..add('allProductsState', allProductsState)
           ..add('settingsState', settingsState)
+          ..add('addProductState', addProductState)
           ..add('isAvailableToAddProduct', isAvailableToAddProduct)
           ..add('error', error)
           ..add('success', success))
@@ -143,11 +177,23 @@ class _$AppState extends AppState {
 class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState? _$v;
 
+  AllProductsStateBuilder? _allProductsState;
+  AllProductsStateBuilder get allProductsState =>
+      _$this._allProductsState ??= new AllProductsStateBuilder();
+  set allProductsState(AllProductsStateBuilder? allProductsState) =>
+      _$this._allProductsState = allProductsState;
+
   SettingsStateBuilder? _settingsState;
   SettingsStateBuilder get settingsState =>
       _$this._settingsState ??= new SettingsStateBuilder();
   set settingsState(SettingsStateBuilder? settingsState) =>
       _$this._settingsState = settingsState;
+
+  AddProductStateBuilder? _addProductState;
+  AddProductStateBuilder get addProductState =>
+      _$this._addProductState ??= new AddProductStateBuilder();
+  set addProductState(AddProductStateBuilder? addProductState) =>
+      _$this._addProductState = addProductState;
 
   bool? _isAvailableToAddProduct;
   bool? get isAvailableToAddProduct => _$this._isAvailableToAddProduct;
@@ -167,7 +213,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   AppStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _allProductsState = $v.allProductsState.toBuilder();
       _settingsState = $v.settingsState.toBuilder();
+      _addProductState = $v.addProductState.toBuilder();
       _isAvailableToAddProduct = $v.isAvailableToAddProduct;
       _error = $v.error;
       _success = $v.success;
@@ -193,7 +241,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     try {
       _$result = _$v ??
           new _$AppState._(
+              allProductsState: allProductsState.build(),
               settingsState: settingsState.build(),
+              addProductState: addProductState.build(),
               isAvailableToAddProduct: BuiltValueNullFieldError.checkNotNull(
                   isAvailableToAddProduct,
                   'AppState',
@@ -203,8 +253,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'allProductsState';
+        allProductsState.build();
         _$failedField = 'settingsState';
         settingsState.build();
+        _$failedField = 'addProductState';
+        addProductState.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

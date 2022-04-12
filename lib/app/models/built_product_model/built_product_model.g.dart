@@ -20,8 +20,6 @@ class _$BuiltProductModelSerializer
   Iterable<Object?> serialize(Serializers serializers, BuiltProductModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'description',
@@ -30,7 +28,13 @@ class _$BuiltProductModelSerializer
       'pice',
       serializers.serialize(object.pice, specifiedType: const FullType(num)),
     ];
-
+    Object? value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -48,7 +52,7 @@ class _$BuiltProductModelSerializer
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'name':
           result.name = serializers.deserialize(value,
@@ -71,7 +75,7 @@ class _$BuiltProductModelSerializer
 
 class _$BuiltProductModel extends BuiltProductModel {
   @override
-  final int id;
+  final int? id;
   @override
   final String name;
   @override
@@ -84,12 +88,11 @@ class _$BuiltProductModel extends BuiltProductModel {
       (new BuiltProductModelBuilder()..update(updates)).build();
 
   _$BuiltProductModel._(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.description,
       required this.pice})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'BuiltProductModel', 'id');
     BuiltValueNullFieldError.checkNotNull(name, 'BuiltProductModel', 'name');
     BuiltValueNullFieldError.checkNotNull(
         description, 'BuiltProductModel', 'description');
@@ -181,8 +184,7 @@ class BuiltProductModelBuilder
   _$BuiltProductModel build() {
     final _$result = _$v ??
         new _$BuiltProductModel._(
-            id: BuiltValueNullFieldError.checkNotNull(
-                id, 'BuiltProductModel', 'id'),
+            id: id,
             name: BuiltValueNullFieldError.checkNotNull(
                 name, 'BuiltProductModel', 'name'),
             description: BuiltValueNullFieldError.checkNotNull(

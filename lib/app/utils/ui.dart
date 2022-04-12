@@ -17,7 +17,7 @@ class Ui {
       SnackBar(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         padding: const EdgeInsets.all(0),
-        behavior: SnackBarBehavior.floating,
+        behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.white,
         content: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -50,7 +50,7 @@ class Ui {
       SnackBar(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         padding: const EdgeInsets.all(0),
-        behavior: SnackBarBehavior.floating,
+        behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.white,
         content: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -105,8 +105,6 @@ class Ui {
       ),
     );
   }
-
- 
 
   static Color parseColor(String hexCode, {double? opacity}) {
     try {
