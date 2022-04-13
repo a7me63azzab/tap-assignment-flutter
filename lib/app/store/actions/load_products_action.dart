@@ -4,8 +4,6 @@ import 'package:redux_thunk/redux_thunk.dart';
 import 'package:tap_assignment/app/models/built_product_model/built_product_model.dart';
 import 'package:tap_assignment/app/repository/product_repository.dart';
 import 'package:tap_assignment/app/store/actions/error_actions.dart';
-import 'package:tap_assignment/app/store/actions/success_actions.dart';
-import 'package:tap_assignment/app/store/states/all_products_state/all_products_state.dart';
 import 'package:built_collection/built_collection.dart';
 
 class LoadProductsActionStart {}
@@ -40,11 +38,8 @@ ThunkAction loadAllProductsThunkAction() {
                   ..id = e['id']
                   ..name = e['name']
                   ..description = e['description']
-                  ..pice = e['price']))
+                  ..price = e['price']))
                 .toList();
-
-            print(
-                "all products from database =-=-=> ${productsResult.toString()}");
 
             Future.delayed(const Duration(seconds: 2), () {
               store.dispatch(LoadProductsActionSuccess(
@@ -61,26 +56,72 @@ ThunkAction loadAllProductsThunkAction() {
             }
             store.dispatch(
                 LoadProductsActionFailed(error: 'Add Product Failed'));
-            // print("error from action =-=> ${response.body?.message}");
 
             store.dispatch(
-              ErrorOccurredAction(
-                  // Exception("${errorResponse.message}"),
-                  'Add Product Failed'),
+              ErrorOccurredAction('Add Product Failed'),
             );
           }
         } catch (err) {
-          if (kDebugMode) {
-            print("from try / catch show $err");
-          }
-          // print("error from action =-=> ${response.error.toString()}");
           store.dispatch(LoadProductsActionFailed(error: 'Add Product Failed'));
-          // print("error from action =-=> ${response.body?.message}");
-          // BuiltErrorResponse? errorResponse =
-          //     response.error as BuiltErrorResponse;
+
           store.dispatch(
             ErrorOccurredAction(
-              // Exception("$err"),
+              "$err",
+            ),
+          );
+        }
+      },
+    );
+  };
+}
+
+ThunkAction searchInProductsThunkAction({required String term}) {
+  ProductRepository productRepository = ProductRepository();
+  return (Store store) async {
+    Future(
+      () async {
+        try {
+          List<Map<String, dynamic>>? result =
+              await productRepository.search(term: term);
+          print("search products -=-> ${result.toString()}");
+          if (result != null && result != []) {
+            if (kDebugMode) {
+              print("success from action =-=> ${result.length}");
+            }
+
+            List<BuiltProductModel> productsResult = result.reversed
+                .map((e) => BuiltProductModel((input) => input
+                  ..id = e['id']
+                  ..name = e['name']
+                  ..description = e['description']
+                  ..price = e['price']))
+                .toList();
+
+            Future.delayed(const Duration(seconds: 2), () {
+              store.dispatch(LoadProductsActionSuccess(
+                  products:
+                      BuiltList.build((p0) => p0..addAll(productsResult))));
+              // store.dispatch(
+              //     SuccessOccurredAction("Product Added Successfully"));
+            });
+
+            // store.dispatch(NavigateToAction.replace("/home"));
+          } else {
+            if (kDebugMode) {
+              print("error from action =-=> Product not added");
+            }
+            store.dispatch(
+                LoadProductsActionFailed(error: 'Add Product Failed'));
+
+            store.dispatch(
+              ErrorOccurredAction('Add Product Failed'),
+            );
+          }
+        } catch (err) {
+          store.dispatch(LoadProductsActionFailed(error: 'Add Product Failed'));
+
+          store.dispatch(
+            ErrorOccurredAction(
               "$err",
             ),
           );

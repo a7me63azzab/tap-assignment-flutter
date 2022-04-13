@@ -50,7 +50,7 @@ class Ui {
       SnackBar(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         padding: const EdgeInsets.all(0),
-        behavior: SnackBarBehavior.fixed,
+        behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
         content: Row(
           mainAxisAlignment: MainAxisAlignment.start,

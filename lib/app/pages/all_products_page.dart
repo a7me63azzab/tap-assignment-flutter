@@ -51,7 +51,9 @@ class _ManageProductsState extends State<ManageProducts> {
                               validate: (String val) {},
                               onSave: (String val) {},
                               inputType: InputType.search,
-                              onChanged: (String val) {},
+                              onChanged: (String val) {
+                                manageProductsViewModel.search(term: val);
+                              },
                             ),
                             Expanded(
                               child: ListView.builder(

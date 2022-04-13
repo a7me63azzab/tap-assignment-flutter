@@ -40,7 +40,7 @@ class ProductWidget extends StatelessWidget {
             height: 9,
           ),
           Text(
-            "Flutter team leader @TapPayments",
+            productModel?.description ?? "Flutter team leader @TapPayments",
             style: TextStyle(
               color: Theme.of(context).colorScheme.tertiary,
               fontFamily: FontFamily.montserratRegular,
@@ -51,7 +51,7 @@ class ProductWidget extends StatelessWidget {
             height: 9,
           ),
           Text(
-            "400 K.D",
+            "${productModel?.price ?? ""} K.D",
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontFamily: FontFamily.montserratRegular,

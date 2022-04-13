@@ -19,15 +19,6 @@ class DatabaseHelper {
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  // only have a single app-wide reference to the database
-  // static  Database _database;
-  // Future<Database> get database async {
-  //   if (_database != null) return _database;
-  //   // lazily instantiate the db the first time it is accessed
-  //   _database = await _initDatabase();
-  //   return _database;
-  // }
-
   static Database? _database;
   Future<Database?> get database async {
     if (_database != null) {
@@ -82,12 +73,30 @@ class DatabaseHelper {
         await db!.rawQuery('SELECT COUNT(*) FROM $table'));
   }
 
+  Future<List<Map<String, dynamic>>> search({String? term}) async {
+    try {
+      print("term from database -=-> $term");
+      Database? db = await instance.database;
+      if (term != null && term != '') {
+        return await db!.rawQuery(
+            'SELECT * FROM $table WHERE name LIKE ? or description LIKE ? or price LIKE ?',
+            ['%$term%', '%$term%', '%$term%']);
+      } else {
+        return await db!.query(table);
+      }
+    } catch (err) {
+      print("erererere $err");
+      return [];
+    }
+  }
+
   // We are assuming here that the id column in the map is set. The other
   // column values will be used to update the row.
   Future<int> update(Map<String, dynamic> row) async {
     Database? db = await instance.database;
     int id = row[columnId];
-    return await db!.update(table, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db!
+        .update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   // Deletes the row specified by the id. The number of affected rows is

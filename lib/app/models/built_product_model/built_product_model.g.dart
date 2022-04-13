@@ -25,8 +25,6 @@ class _$BuiltProductModelSerializer
       'description',
       serializers.serialize(object.description,
           specifiedType: const FullType(String)),
-      'pice',
-      serializers.serialize(object.pice, specifiedType: const FullType(num)),
     ];
     Object? value;
     value = object.id;
@@ -34,6 +32,12 @@ class _$BuiltProductModelSerializer
       result
         ..add('id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.price;
+    if (value != null) {
+      result
+        ..add('price')
+        ..add(serializers.serialize(value, specifiedType: const FullType(num)));
     }
     return result;
   }
@@ -62,9 +66,9 @@ class _$BuiltProductModelSerializer
           result.description = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'pice':
-          result.pice = serializers.deserialize(value,
-              specifiedType: const FullType(num)) as num;
+        case 'price':
+          result.price = serializers.deserialize(value,
+              specifiedType: const FullType(num)) as num?;
           break;
       }
     }
@@ -81,22 +85,18 @@ class _$BuiltProductModel extends BuiltProductModel {
   @override
   final String description;
   @override
-  final num pice;
+  final num? price;
 
   factory _$BuiltProductModel(
           [void Function(BuiltProductModelBuilder)? updates]) =>
       (new BuiltProductModelBuilder()..update(updates)).build();
 
   _$BuiltProductModel._(
-      {this.id,
-      required this.name,
-      required this.description,
-      required this.pice})
+      {this.id, required this.name, required this.description, this.price})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'BuiltProductModel', 'name');
     BuiltValueNullFieldError.checkNotNull(
         description, 'BuiltProductModel', 'description');
-    BuiltValueNullFieldError.checkNotNull(pice, 'BuiltProductModel', 'pice');
   }
 
   @override
@@ -114,14 +114,14 @@ class _$BuiltProductModel extends BuiltProductModel {
         id == other.id &&
         name == other.name &&
         description == other.description &&
-        pice == other.pice;
+        price == other.price;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc($jc($jc(0, id.hashCode), name.hashCode), description.hashCode),
-        pice.hashCode));
+        price.hashCode));
   }
 
   @override
@@ -130,7 +130,7 @@ class _$BuiltProductModel extends BuiltProductModel {
           ..add('id', id)
           ..add('name', name)
           ..add('description', description)
-          ..add('pice', pice))
+          ..add('price', price))
         .toString();
   }
 }
@@ -151,9 +151,9 @@ class BuiltProductModelBuilder
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
-  num? _pice;
-  num? get pice => _$this._pice;
-  set pice(num? pice) => _$this._pice = pice;
+  num? _price;
+  num? get price => _$this._price;
+  set price(num? price) => _$this._price = price;
 
   BuiltProductModelBuilder();
 
@@ -163,7 +163,7 @@ class BuiltProductModelBuilder
       _id = $v.id;
       _name = $v.name;
       _description = $v.description;
-      _pice = $v.pice;
+      _price = $v.price;
       _$v = null;
     }
     return this;
@@ -189,8 +189,7 @@ class BuiltProductModelBuilder
                 name, 'BuiltProductModel', 'name'),
             description: BuiltValueNullFieldError.checkNotNull(
                 description, 'BuiltProductModel', 'description'),
-            pice: BuiltValueNullFieldError.checkNotNull(
-                pice, 'BuiltProductModel', 'pice'));
+            price: price);
     replace(_$result);
     return _$result;
   }

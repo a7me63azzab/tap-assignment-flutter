@@ -14,11 +14,16 @@ class ProductRepository {
     return _db.insert({
       "name": productModel.name,
       "description": productModel.description,
-      "price": productModel.pice,
+      "price": productModel.price,
     });
   }
 
   Future<List<Map<String, dynamic>>?> getAllProducts() {
     return _db.queryAllRows();
+  }
+
+  Future<List<Map<String, dynamic>>?> search({required String term}) {
+    print("term from repo -=-> $term");
+    return _db.search(term: term);
   }
 }

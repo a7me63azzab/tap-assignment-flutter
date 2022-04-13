@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:redux/redux.dart';
 import 'package:tap_assignment/app/store/actions/success_actions.dart';
 import 'package:tap_assignment/app/store/app_state/app_state.dart';
@@ -27,19 +26,7 @@ class SuccessNotifier extends StatelessWidget {
                 "FROM SUCCESS NOTIFIER SHOW SUCCESS -> ${vm.success.toString()}");
           }
 
-          // showToastWidget(Text(vm.success.toString()), context: context);
-
-          // showToast(
-          //   'This is normal toast with animation',
-          //   context: context,
-          //   animation: StyledToastAnimation.scale,
-          //   reverseAnimation: StyledToastAnimation.fade,
-          //   position: StyledToastPosition.center,
-          //   animDuration: const Duration(seconds: 1),
-          //   duration: const Duration(seconds: 4),
-          //   curve: Curves.elasticOut,
-          //   reverseCurve: Curves.linear,
-          // );
+         
 
           Ui.successSnackBar(
               context: context, title: "Success", msg: vm.success.toString());

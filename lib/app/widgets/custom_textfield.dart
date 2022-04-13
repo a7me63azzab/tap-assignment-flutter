@@ -47,10 +47,10 @@ class CustomTextField extends StatelessWidget {
             }
           }(),
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          inputFormatters: [
-            FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
-                allow: inputType == InputType.price ? true : false),
-          ],
+          // inputFormatters: [
+          // FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
+          //     allow: inputType == InputType.price ? true : false),
+          // ],
           onSaved: (val) => onSave(val ?? ""),
           validator: (val) => validate(val ?? ""),
           onChanged: (val) => onChanged(val),

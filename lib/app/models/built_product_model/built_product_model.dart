@@ -14,7 +14,7 @@ abstract class BuiltProductModel
   int? get id;
   String get name;
   String get description;
-  num get pice;
+  num? get price;
 
   BuiltProductModel._();
 

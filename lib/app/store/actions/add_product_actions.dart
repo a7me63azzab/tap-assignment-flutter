@@ -43,7 +43,7 @@ ThunkAction addProductThunkAction(
             BuiltProductModel((input) => input
               ..name = name
               ..description = description
-              ..pice = price),
+              ..price = price),
           );
           if (productId != null) {
             if (kDebugMode) {
