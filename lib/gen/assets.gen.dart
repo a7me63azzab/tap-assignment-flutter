@@ -19,8 +19,17 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/button_loader.json
   String get buttonLoader => 'assets/lottie/button_loader.json';
 
+  /// File path: assets/lottie/empty_box.json
+  String get emptyBox => 'assets/lottie/empty_box.json';
+
   /// File path: assets/lottie/error_anime.json
   String get errorAnime => 'assets/lottie/error_anime.json';
+
+  /// File path: assets/lottie/error_happened.json
+  String get errorHappened => 'assets/lottie/error_happened.json';
+
+  /// File path: assets/lottie/no_search.json
+  String get noSearch => 'assets/lottie/no_search.json';
 
   /// File path: assets/lottie/success_anime.json
   String get successAnime => 'assets/lottie/success_anime.json';

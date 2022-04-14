@@ -45,11 +45,7 @@ ThunkAction loadAllProductsThunkAction() {
               store.dispatch(LoadProductsActionSuccess(
                   products:
                       BuiltList.build((p0) => p0..addAll(productsResult))));
-              // store.dispatch(
-              //     SuccessOccurredAction("Product Added Successfully"));
             });
-
-            // store.dispatch(NavigateToAction.replace("/home"));
           } else {
             if (kDebugMode) {
               print("error from action =-=> Product not added");
@@ -101,24 +97,21 @@ ThunkAction searchInProductsThunkAction({required String term}) {
               store.dispatch(LoadProductsActionSuccess(
                   products:
                       BuiltList.build((p0) => p0..addAll(productsResult))));
-              // store.dispatch(
-              //     SuccessOccurredAction("Product Added Successfully"));
             });
-
-            // store.dispatch(NavigateToAction.replace("/home"));
           } else {
             if (kDebugMode) {
               print("error from action =-=> Product not added");
             }
             store.dispatch(
-                LoadProductsActionFailed(error: 'Add Product Failed'));
+                LoadProductsActionFailed(error: 'Load Products Failed'));
 
             store.dispatch(
-              ErrorOccurredAction('Add Product Failed'),
+              ErrorOccurredAction('Load Products Failed'),
             );
           }
         } catch (err) {
-          store.dispatch(LoadProductsActionFailed(error: 'Add Product Failed'));
+          store.dispatch(
+              LoadProductsActionFailed(error: 'Load Products Failed'));
 
           store.dispatch(
             ErrorOccurredAction(

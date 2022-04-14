@@ -115,6 +115,20 @@ class Ui {
     }
   }
 
+  static Widget errorWidget() {
+    return Center(
+      child: Lottie.asset(Assets.lottie.errorHappened,
+          repeat: false, fit: BoxFit.contain, width: 200, height: 200),
+    );
+  }
+
+  static Widget emptyWidget() {
+    return Center(
+      child: Lottie.asset(Assets.lottie.emptyBox,
+          repeat: false, fit: BoxFit.contain, width: 200, height: 200),
+    );
+  }
+
   static Widget showSvgFromAsset(
       {required String assetName,
       required double width,

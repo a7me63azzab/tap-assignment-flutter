@@ -4,21 +4,6 @@ import 'package:tap_assignment/app/store/app_state/app_state.dart';
 import 'package:tap_assignment/app/utils/ui.dart';
 import 'package:tap_assignment/gen/fonts.gen.dart';
 
-// {
-//   FontWeight.w100: 'Thin',
-//   FontWeight.w200: 'ExtraLight',
-//   FontWeight.w300: 'Light',
-//   FontWeight.w400: 'Regular',
-//   FontWeight.w500: 'Medium',
-//   FontWeight.w600: 'SemiBold',
-//   FontWeight.w700: 'Bold',
-//   FontWeight.w800: 'ExtraBold',
-//   FontWeight.w900: 'Black',
-// }
-
-// main [FF7F7D]
-// second [141414]
-// third [777777]
 
 abstract class CustomAppTheme {
   static ThemeData getLightTheme(AppState appState) {
@@ -103,6 +88,7 @@ abstract class CustomAppTheme {
         onTertiary: Colors.white,
         background: Colors.white,
         outline: Ui.parseColor("#00BB41"),
+        surface: Colors.grey.withOpacity(0.4),
         // primary: Ui.parseColor(appState.settingsState.mainColor),
         // secondary: Ui.parseColor(appState.settingsState.mainColor),
         // tertiary: Colors.white,
@@ -239,11 +225,8 @@ abstract class CustomAppTheme {
           style: TextButton.styleFrom(
               primary: Ui.parseColor(appState.settingsState.mainColor)),
         ),
-        // colorScheme: ColorScheme.dark(
-        //   primary: Ui.parseColor(appState.settingsState.mainDarkColor),
-        //   secondary: Ui.parseColor(appState.settingsState.mainDarkColor),
-        // ),
-        colorScheme: ColorScheme.light(
+        
+        colorScheme: ColorScheme.dark(
           brightness: Brightness.dark,
           shadow: Colors.black.withOpacity(0.3),
           primary: Ui.parseColor("#FF7F7D"),
@@ -252,9 +235,8 @@ abstract class CustomAppTheme {
           onTertiary: Ui.parseColor("#3E2B2B"),
           background: Colors.black,
           outline: Ui.parseColor("#7BEB9D"),
-          // primary: Ui.parseColor(appState.settingsState.mainColor),
-          // secondary: Ui.parseColor(appState.settingsState.mainColor),
-          // tertiary: Colors.white,
+          surface: Colors.grey.withOpacity(0.4),
+          
         ),
         textTheme: GoogleFonts.getTextTheme(
             appState.settingsState.googleFont,

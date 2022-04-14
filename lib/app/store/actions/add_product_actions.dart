@@ -52,7 +52,7 @@ ThunkAction addProductThunkAction(
             Future.delayed(const Duration(seconds: 2), () {
               store.dispatch(AddProductActionSuccess(productId: productId));
               store.dispatch(
-                  SuccessOccurredAction("Product Added Successfully"));
+                  SuccessOccurredAction("Product Was Added Successfully"));
 
               store.dispatch(NavigateToAction.replace("/allProducts"));
             });
